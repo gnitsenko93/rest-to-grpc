@@ -1,0 +1,22 @@
+{
+  "name": "rest-to-grpc",
+  "version": "0.0.1",
+  "description": "A simple example of REST wrapper over gRPC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnitsenko93/rest-to-grpc.git"
+  },
+  "author": "Greg Nitsenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnitsenko93/rest-to-grpc/issues"
+  },
+  "homepage": "https://github.com/gnitsenko93/rest-to-grpc#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
