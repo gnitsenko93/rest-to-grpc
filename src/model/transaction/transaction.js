@@ -18,7 +18,7 @@ class Transaction extends Logable {
     constructor(options) {
         super(options);
 
-        this._bitcoinClient = options.bitcointClient || new BitcoinClient(options);
+        this._bitcoinClient = options.bitcoinClient || new BitcoinClient(options);
     }
 
     /**
