@@ -17,8 +17,7 @@ class CreateTransactionController extends Controller {
 
     async _processRequest(req) {
         const {
-            body: { amount },
-            params: { addressId },
+            body: { amount, addressId },
             userAuth
         } = req;
 

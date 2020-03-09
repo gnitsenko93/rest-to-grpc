@@ -8,7 +8,7 @@ class BitcointClient extends Logable {
     constructor(options) {
         super(options);
 
-        this._httpClient = options.client || new HttpClient(options);
+        this._httpClient = options.client || new HttpClient(options.pub);
 
         this._jsonrpc = options.jsonrpc;
 
@@ -17,8 +17,8 @@ class BitcointClient extends Logable {
     async createAddress(params, options) {
         const reqParams = this._getReqParams({
             method: BitcointClient.METHOD.GET_NEW_ADDRESS,
-            params: []
-        });
+            data: []
+        }, options);
 
         return this._httpClient.request(reqParams);
     }
@@ -30,8 +30,8 @@ class BitcointClient extends Logable {
 
         const reqParams = this._getReqParams({
             method: BitcointClient.METHOD.GET_TRANSACTION,
-            params: [transactionId]
-        });
+            data: [transactionId]
+        }, options);
 
         const result = await this._httpClient.request(reqParams);
 
@@ -45,8 +45,8 @@ class BitcointClient extends Logable {
 
         const reqParams = this._getReqParams({
             method: BitcointClient.METHOD.SEND_TO_ADDRESS,
-            params: [addressId, amount]
-        });
+            data: [addressId, amount]
+        }, options);
 
         return this._httpClient.request(reqParams);
     }
@@ -59,7 +59,7 @@ class BitcointClient extends Logable {
 
     _getReqParams(params, options) {
         const {
-            id, method, params
+            id, method, data
         } = params;
         const {
             userAuth
@@ -71,7 +71,7 @@ class BitcointClient extends Logable {
                 id,
                 jsonrpc: this._jsonrpc,
                 method,
-                params
+                params: data
             }
         }
     }

@@ -1,3 +1,6 @@
+# Integration test (0.0.3)
+* Integration test for a transaction creation is added.
+
 # Test coverage (0.0.2)
 #### Tests
 * Unit test for GetTransactionController class is added.

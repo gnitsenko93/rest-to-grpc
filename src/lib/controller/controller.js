@@ -20,10 +20,12 @@ class Controller extends Logable {
 
             if (typeof result === 'undefined' || result === null) {
                 res.status(204);
-            } else {
-                res.status(200);
+            } else if (typeof result === 'object') {
                 res.json(result);
+            } else {
+                res.write(result);
             }
+            res.status(200);
         } catch (error) {
             res.status(500).json({error})
         }

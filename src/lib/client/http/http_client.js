@@ -18,29 +18,33 @@ class HttpClient extends Logable {
     async request(params) {
         let result;
 
-        const req = http.request({
-            host: this._host,
-            port: this._port,
-            path: this._apiPrefix,
-            auth: params.auth,
-            headers: {
-                "content-type": "application/json; charset=utf-8"
-            }
-        }, res => {
-            res.on('data', (chunk) => {
-                result += result;
-            });
-            res.on('end', () => {
-                return result;
-            });
-        });
+        return new Promise((resolve, reject) => {
+            let data;
 
-        req.on('error', error => {
-            throw error;
-        });
+            const req = http.request({
+                host: this._host,
+                port: this._port,
+                path: this._apiPrefix,
+                auth: params.auth,
+                headers: {
+                    "content-type": "application/json; charset=utf-8"
+                }
+            }, res => {
+                res.on('data', chunk => {
+                    data = chunk;
+                })
+                res.on('end', result => {
+                    resolve(data.toString());
+                });
+            });
 
-        req.write(JSON.stringify(params.body));
-        req.end();
+            req.on('error', error => {
+                reject(error);
+            });
+
+            req.write(JSON.stringify(params.body));
+            req.end();
+        });
     }
 }
 
