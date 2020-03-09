@@ -16,10 +16,8 @@ class HttpClient extends Logable {
     }
 
     async request(params) {
-        let result;
-
         return new Promise((resolve, reject) => {
-            let data;
+            let data = '';
 
             const req = http.request({
                 host: this._host,
@@ -31,10 +29,10 @@ class HttpClient extends Logable {
                 }
             }, res => {
                 res.on('data', chunk => {
-                    data = chunk;
-                })
-                res.on('end', result => {
-                    resolve(data.toString());
+                    data += chunk.toString();
+                });
+                res.on('end', () => {
+                    resolve(data);
                 });
             });
 

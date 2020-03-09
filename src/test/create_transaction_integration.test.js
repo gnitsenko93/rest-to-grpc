@@ -1,4 +1,4 @@
-/** global describe, it, after */
+/* global describe, it, after */
 'use strict';
 
 const should = require('should');
@@ -35,14 +35,14 @@ describe('Service ', () => {
             }
         });
 
-        const scope = nock(`http://${pubHost}:${pubPort}`)
+        nock(`http://${pubHost}:${pubPort}`)
             .get('/api')
             .reply(200, transactionId);
 
         await service.start();
 
         await new Promise((resolve, reject) => {
-            let data;
+            let data = '';
             const req = http.request({
                 host: subHost,
                 port: subPort,
@@ -54,7 +54,7 @@ describe('Service ', () => {
                 path: '/transactions'
             }, res => {
                 res.on('data', chunk => {
-                    data = chunk.toString();
+                    data += chunk.toString();
                 });
 
                 res.on('end', () => {

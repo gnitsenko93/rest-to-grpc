@@ -33,7 +33,7 @@ class Controller extends Logable {
         return res.end();
     }
 
-    async _processRequest(req) {
+    async _processRequest() {
         throw new Error('_processRequest is not implemented');
     }
 }

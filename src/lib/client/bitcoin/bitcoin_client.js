@@ -51,9 +51,8 @@ class BitcointClient extends Logable {
         return this._httpClient.request(reqParams);
     }
 
-    async getTransactions(params, options) {
-        // TODO
-
+    async getTransactions() {
+        // TODO: Implemen getTransactions
         throw new Error('Not yet implemented');
     }
 

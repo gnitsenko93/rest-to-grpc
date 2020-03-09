@@ -1,3 +1,6 @@
+# Linting (0.0.4)
+* Adding eslint to the project and fixing problems.
+
 # Integration test (0.0.3)
 * Integration test for a transaction creation is added.
 
