@@ -7,15 +7,14 @@ const Route = require('./route');
 
 // Typedef
 /**
- * @typedef {import('./lib/logable').Logger} Logger -
- * @typedef {import('./lib/transport').TransportOptions} TransportOptions -
+ * @typedef {{host: string, port: number}} SubOptions -
+ * @typedef {{host: string, port: number, apiPrefix: string}} PubOptions -
  */
 
 /**
  * @typedef {Object} ServiceOptions
- * @property {TransportOptions} options.transportOptions -
- * @property {Transport} [transport] -
- * @property {Logger} [logger] -
+ * @property {SubOptions} sub -
+ * @property {PubOptions} pub -
  */
 
 /**
@@ -35,15 +34,28 @@ class Service extends Logable {
         this._route = new Route({...options, transport: this._transport});
     }
 
+    /**
+     * Starts service.
+     * @returns {Promise<void>} -
+     */
     async start() {
         this._route.init();
         return this._transport.start();
     }
 
+    /**
+     * Inits routes.
+     * @returns {void} -
+     * @private
+     */
     _initRoute() {
         this._route.init();
     }
 
+    /**
+     * Stops service.
+     * @returns {Promise<void>} -
+     */
     async stop() {
         return this._transport.stop();
     }

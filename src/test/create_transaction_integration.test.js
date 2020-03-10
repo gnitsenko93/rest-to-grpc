@@ -58,7 +58,7 @@ describe('Service ', () => {
                 });
 
                 res.on('end', () => {
-                    should(data).be.eqls(transactionId);
+                    should(data).be.eqls(JSON.stringify({ id: transactionId }));
 
                     resolve();
                 });

@@ -14,7 +14,9 @@ class CreateAddressController extends Controller {
     async _processRequest(req) {
         const { userAuth } = req;
 
-        return await this._address.create({}, { userAuth });
+        const addressId = await this._address.create({}, { userAuth });
+
+        return { id: addressId };
     }
 }
 

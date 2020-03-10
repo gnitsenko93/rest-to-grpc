@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  version: "0.0.5"
+  title: "REST to gRPC wrapper"
+host: "127.0.0.1"
+basePath: "/api"
+tags:
+  - name: "address"
+  - name: "transactions"
+schemes:
+  - "http"
+paths:
+  /addresses:
+    post:
+      tags:
+        - "address"
+      operationId: "createAddress"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "addressId"
+          schema:
+            $ref: "#/definitions/Address"
+  /transactions:
+    post:
+      tags:
+        - "transactions"
+      operationId: "createTransaction"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionCreationBody"
+      responses:
+        200:
+          description: "transactionId"
+          schema:
+            $ref: "#/definitions/Transaction"
+  /transactions/{transactionId}:
+    get:
+      tags:
+        - "transactions"
+      operationId: "getTransaction"
+      parameters:
+        - name: "transactionId"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "transaction data"
+          schema:
+            $ref: "#/definitions/Transaction"
+definitions:
+  Address:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+  Transaction:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+  TransactionCreationBody:
+    type: "object"
+    properties:
+      addressId:
+        type: "string"
+      amount:
+        type: "integer"

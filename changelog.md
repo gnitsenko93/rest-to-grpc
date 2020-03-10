@@ -1,3 +1,8 @@
+# Documentation (0.0.5)
+* Adding _/swagger/swagger.yml_.
+* Adding jsdoc coverage.
+* Updating _README.md_.
+
 # Linting (0.0.4)
 * Adding eslint to the project and fixing problems.
 

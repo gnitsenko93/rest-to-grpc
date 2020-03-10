@@ -3,7 +3,6 @@
 // Imports
 const Logable = require('../logable');
 
-
 /**
  * @class Controller
  * @extends Logable
@@ -14,6 +13,12 @@ class Controller extends Logable {
         super(options);
     }
 
+    /**
+     * Handles HTTP request.
+     * @param {Request} req -
+     * @param {Response} res -
+     * @returns {Promise<void>} -
+     */
     async handler(req, res) {
         try {
             const result = await this._processRequest(req);

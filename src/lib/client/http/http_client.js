@@ -4,6 +4,10 @@ const http = require('http');
 
 const Logable = require('../../logable');
 
+/**
+ * @class HttpClient
+ * @extends Logable
+ */
 class HttpClient extends Logable {
 
     constructor(options) {
@@ -15,6 +19,11 @@ class HttpClient extends Logable {
         this._apiPrefix = options.apiPrefix;
     }
 
+    /**
+     * Executes HTTP request.
+     * @param {Object} params -
+     * @returns {Promise<Object>} response.
+     */
     async request(params) {
         return new Promise((resolve, reject) => {
             let data = '';

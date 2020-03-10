@@ -1,9 +1,10 @@
 {
   "name": "rest-to-grpc",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple example of REST wrapper over gRPC",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "eslint . & find src -name '*.test.js' -exec mocha {} \\;"
   },
   "repository": {

@@ -3,8 +3,24 @@
 const Logable = require('../../logable');
 const HttpClient = require('../http');
 
+/**
+ * @typedef {{pub: {host: string, port: number, apiPrefix: string}}} BitcointClientOptions
+ * @typedef {string} AddressId
+ * @typedef {string} TransactionId
+ * @typedef {Object} TransactionData
+ * @typedef {{user: string, password: string}} UserAuth -
+ */
+
+/**
+ * @class BitcointClient
+ * @extends Logable
+ */
 class BitcointClient extends Logable {
 
+    /**
+     * @param {BitcointClientOptions} options -
+     * @constructor
+     */
     constructor(options) {
         super(options);
 
@@ -14,6 +30,12 @@ class BitcointClient extends Logable {
 
     }
 
+    /**
+     * Creates an address at bitcoin server.
+     * @param {Object} params -
+     * @param {{userAuth: UserAuth}} options -
+     * @returns {Promise<AddressId>} -
+     */
     async createAddress(params, options) {
         const reqParams = this._getReqParams({
             method: BitcointClient.METHOD.GET_NEW_ADDRESS,
@@ -23,6 +45,12 @@ class BitcointClient extends Logable {
         return this._httpClient.request(reqParams);
     }
 
+    /**
+     * Gets a transaction from bitcoin server.
+     * @param {{transactionId: TransactionId}} params -
+     * @param {{userAuth: UserAuth}} options -
+     * @returns {Promise<TransactionData>} -
+     */
     async getTransaction(params, options) {
         const {
             transactionId
@@ -38,6 +66,12 @@ class BitcointClient extends Logable {
         return JSON.parse(result);
     }
 
+    /**
+     * Creates a transaction at bitcoin server.
+     * @param {{amount: number, addressId: AddressId}} params -
+     * @param {{userAuth: UserAuth}} options -
+     * @returns {Promise<TransactionId>} -
+     */
     async createTransaction(params, options) {
         const {
             addressId, amount
@@ -56,6 +90,13 @@ class BitcointClient extends Logable {
         throw new Error('Not yet implemented');
     }
 
+    /**
+     * Converts parameters to gRPC data.
+     * @param {Object} params -
+     * @param {{userAuth: UserAuth}} options -
+     * @returns {{auth: string, body: {method: *, id: *, jsonrpc: *, params: *}}} -
+     * @private
+     */
     _getReqParams(params, options) {
         const {
             id, method, data

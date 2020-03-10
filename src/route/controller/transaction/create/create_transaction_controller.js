@@ -21,7 +21,9 @@ class CreateTransactionController extends Controller {
             userAuth
         } = req;
 
-        return await this._transaction.create({ addressId, amount }, { userAuth });
+        const transactionId = await this._transaction.create({ addressId, amount }, { userAuth });
+
+        return { id: transactionId };
     }
 }
 
