@@ -26,7 +26,7 @@ class BitcointClient extends Logable {
 
         this._httpClient = options.client || new HttpClient(options.pub);
 
-        this._jsonrpc = options.jsonrpc;
+        this._jsonrpc = options.jsonrpc || "1.0";
 
     }
 
